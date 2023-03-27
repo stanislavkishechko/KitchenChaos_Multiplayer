@@ -1,39 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HostDisconnectUI : MonoBehaviour {
+public class HostDisconnectUI : MonoBehaviour 
+{
 
 
     [SerializeField] private Button playAgainButton;
 
 
-    private void Awake() {
-        playAgainButton.onClick.AddListener(() => {
+    private void Awake() 
+    {
+        playAgainButton.onClick.AddListener(() => 
+        {
             Loader.Load(Loader.Scene.MainMenuScene);
         });
     }
 
-    private void Start() {
+
+    private void Start() 
+    {
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
 
         Hide();
     }
 
-    private void NetworkManager_OnClientDisconnectCallback(ulong clientId) {
-        if (clientId == NetworkManager.ServerClientId) {
-            // Server is shutting down
+
+    private void NetworkManager_OnClientDisconnectCallback(ulong clientId) 
+    {
+        if (clientId == NetworkManager.ServerClientId) 
+        {
             Show();
         }
     }
 
-    private void Show() {
+
+    private void Show() 
+    {
         gameObject.SetActive(true);
     }
 
-    private void Hide() {
+
+    private void Hide() 
+    {
         gameObject.SetActive(false);
     }
 

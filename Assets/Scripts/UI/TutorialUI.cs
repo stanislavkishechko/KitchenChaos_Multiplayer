@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TutorialUI : MonoBehaviour {
+public class TutorialUI : MonoBehaviour 
+{
 
 
     [SerializeField] private TextMeshProUGUI keyMoveUpText;
@@ -18,7 +19,8 @@ public class TutorialUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI keyGamepadPauseText;
 
 
-    private void Start() {
+    private void Start() 
+    {
         GameInput.Instance.OnBindingRebind += GameInput_OnBindingRebind;
         KitchenGameManager.Instance.OnLocalPlayerReadyChanged += KitchenGameManager_OnLocalPlayerReadyChanged;
 
@@ -27,17 +29,24 @@ public class TutorialUI : MonoBehaviour {
         Show();
     }
 
-    private void KitchenGameManager_OnLocalPlayerReadyChanged(object sender, System.EventArgs e) {
-        if (KitchenGameManager.Instance.IsLocalPlayerReady()) {
+
+    private void KitchenGameManager_OnLocalPlayerReadyChanged(object sender, System.EventArgs e) 
+    {
+        if (KitchenGameManager.Instance.IsLocalPlayerReady()) 
+        {
             Hide();
         }
     }
 
-    private void GameInput_OnBindingRebind(object sender, System.EventArgs e) {
+
+    private void GameInput_OnBindingRebind(object sender, System.EventArgs e) 
+    {
         UpdateVisual();
     }
 
-    private void UpdateVisual() {
+
+    private void UpdateVisual() 
+    {
         keyMoveUpText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Move_Up);
         keyMoveDownText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Move_Down);
         keyMoveLeftText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Move_Left);
@@ -50,11 +59,15 @@ public class TutorialUI : MonoBehaviour {
         keyGamepadPauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Gamepad_Pause);
     }
 
-    private void Show() {
+
+    private void Show() 
+    {
         gameObject.SetActive(true);
     }
 
-    private void Hide() {
+
+    private void Hide() 
+    {
         gameObject.SetActive(false);
     }
 }

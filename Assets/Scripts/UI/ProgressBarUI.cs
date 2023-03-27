@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBarUI : MonoBehaviour {
+public class ProgressBarUI : MonoBehaviour 
+{
 
 
     [SerializeField] private GameObject hasProgressGameObject;
@@ -13,9 +12,11 @@ public class ProgressBarUI : MonoBehaviour {
     private IHasProgress hasProgress;
 
 
-    private void Start() {
+    private void Start() 
+    {
         hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
-        if (hasProgress == null) {
+        if (hasProgress == null) 
+        {
             Debug.LogError("Game Object " + hasProgressGameObject + " does not have a component that implements IHasProgress!");
         }
 
@@ -26,24 +27,29 @@ public class ProgressBarUI : MonoBehaviour {
         Hide();
     }
 
+
     private void HasProgress_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e) {
         barImage.fillAmount = e.progressNormalized;
 
-        if (e.progressNormalized == 0f || e.progressNormalized == 1f) {
+        if (e.progressNormalized == 0f || e.progressNormalized == 1f) 
+        {
             Hide();
-        } else {
+        } 
+        else 
+        {
             Show();
         }
     }
 
-    private void Show() {
+
+    private void Show() 
+    {
         gameObject.SetActive(true);
     }
 
-    private void Hide() {
+
+    private void Hide() 
+    {
         gameObject.SetActive(false);
     }
-
-
-
 }

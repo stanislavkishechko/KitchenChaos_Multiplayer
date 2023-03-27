@@ -1,22 +1,23 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEngine;
 
-public class TrashCounter : BaseCounter {
+public class TrashCounter : BaseCounter 
+{
 
 
     public static event EventHandler OnAnyObjectTrashed;
 
-    new public static void ResetStaticData() {
+
+    new public static void ResetStaticData() 
+    {
         OnAnyObjectTrashed = null;
     }
 
 
-
-    public override void Interact(Player player) {
-        if (player.HasKitchenObject()) {
+    public override void Interact(Player player) 
+    {
+        if (player.HasKitchenObject()) 
+        {
             KitchenObject.DestroyKitchenObject(player.GetKitchenObject());
 
             InteractLogicServerRpc();
@@ -24,13 +25,14 @@ public class TrashCounter : BaseCounter {
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void InteractLogicServerRpc() {
+    private void InteractLogicServerRpc() 
+    {
         InteractLogicClientRpc();
     }
 
     [ClientRpc]
-    private void InteractLogicClientRpc() {
+    private void InteractLogicClientRpc() 
+    {
         OnAnyObjectTrashed?.Invoke(this, EventArgs.Empty);
     }
-
 }
